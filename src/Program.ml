@@ -44,8 +44,8 @@ let expression_to_tree text =
 
 let (input, output) = (open_in "input.txt", open_out "output.txt");;
 
-input |> input_line |> expression_to_tree |> fprintf output "%s\n";;
-(*stdin |> input_line |> expression_to_tree |> fprintf stdout "%s\n";;*)
+(*input |> input_line |> expression_to_tree |> fprintf output "%s\n";;*)
+stdin |> input_line |> expression_to_tree |> fprintf stdout "%s\n";;
 
 
 (*[<EntryPoint>]

@@ -1,10 +1,12 @@
-.PHONY: pack all run clean
+#.PHONY: all build run zip clean
 OCAMLC=ocamlc
 ARCHIVE=hw1.zip
 
-all: Program.exe
+all: build
 
-run: Program.exe
+build: Program.exe
+
+run:
 	./Program.exe
 
 lexer: src/LogicLexer.mll
@@ -19,7 +21,7 @@ Program.exe: lexer parser
 clean:
 	rm -f src/LogicLexer.ml src/LogicParser.mli src/LogicParser.ml src/*.c* out/Program.exe
 
-pack: clean
+zip: clean
 	zip $(ARCHIVE) -r Makefile src
 
 
