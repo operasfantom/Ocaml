@@ -34,15 +34,15 @@ let expression_to_tree text =
           yield ")"
       }*)
   let rec analyse tree = match tree with
-    | Var v -> [v]
-    | Neg t -> ["(!"] @ (analyse t) @ [")"]
-    | Binop(op, t1, t2) -> ["("] @ [format op] @ [","] @ (analyse t1) @ [","] @ (analyse t2) @ [")"]
-  in analyse;
+    | Var v -> ([v])
+    | Neg t -> (["(!"] @ (analyse t) @ [")"])
+    | Binop(op, t1, t2) -> (["("] @ [format op] @ [","] @ (analyse t1) @ [","] @ (analyse t2) @ [")"])
+  in
 
-  text |> tree_from_text |> analyse |> String.concat ""
+  text |> tree_from_text |> analyse |> String.concat "";;
 
 
-let (input, output) = (open_in "input.txt", open_out "output.txt");;
+(*let (input, output) = (open_in "input.txt", open_out "output.txt");;*)
 
 (*input |> input_line |> expression_to_tree |> fprintf output "%s\n";;*)
 stdin |> input_line |> expression_to_tree |> fprintf stdout "%s\n";;
