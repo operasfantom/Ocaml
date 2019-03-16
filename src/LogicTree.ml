@@ -1,8 +1,6 @@
-module LogicTree
+type op = Conj | Disj | Impl;;
 
-type op = | Conj | Disj | Impl;;
-
-type tree =
-        | Binop of op * tree * tree
+type tree = 
+	| Binop of op * tree * tree
         | Neg of tree
-        | Var of string
+        | Var of string;;

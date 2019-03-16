@@ -1,13 +1,25 @@
-#.PHONY: all run parser lexer
+.PHONY: pack all run clean
+OCAMLC=ocamlc
+ARCHIVE=hw1.zip
 
-all:Program.exe
+all: Program.exe
 
-lexer:
+run: Program.exe
+	./Program.exe
+
+lexer: src/LogicLexer.mll
 	ocamllex src/LogicLexer.mll
-parser:
+
+parser: src/LogicParser.mly
 	ocamlyacc src/LogicParser.mly
 
 Program.exe: lexer parser
-	ocamlc src/Tree.ml src/LogicLexer.mll src/LogicParser.mly src/Program.ml -o out/Program.exe
-run: Program.exe
-	Program.exe
+	cd src && $(OCAMLC) LogicTree.ml LogicParser.mli LogicParser.ml LogicLexer.ml Program.ml -o ../Program.exe
+
+clean:
+	rm -f src/LogicLexer.ml src/LogicParser.mli src/LogicParser.ml src/*.c* out/Program.exe
+
+pack: clean
+	zip $(ARCHIVE) -r Makefile src
+
+

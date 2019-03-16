@@ -1,17 +1,17 @@
 {
-module LogicLexer
-
-open LogicParser
+open LogicParser;;
 }
 
 let variable = ['A' - 'Z']+ ['A' - 'Z' '0' - '9' ''']*
 
 rule tokenize = parse
-        | variable      { VAR(LexBuffer<_>.LexemeString lexbuf) }
+        | variable as v { VAR(v) }
         | "->"          { IMPL }
         | "&"           { AND }
         | "|"           { OR }
         | "!"           { NOT }
         | "("           { OPEN }
         | ")"           { CLOSE }
-        | eof           { EOF }
+        | eof           { EOF }  
+
+

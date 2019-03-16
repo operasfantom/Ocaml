@@ -1,5 +1,5 @@
 %{
-  open LogicTree
+  open LogicTree;;
 %}
 %token <string> VAR
 %token IMPL AND OR NOT
@@ -13,11 +13,11 @@
 %type <LogicTree.tree> parse
 %%
 parse:
-        expr EOF            { $1 }
+        expr EOF           { $1 }
 expr:
-        | VAR               { Var ($1) }
-        | OPEN expr CLOSE   { $2 }
-        | NOT expr          { Neg ($2) }
-        | expr IMPL expr    { Binop (Impl, $1, $3) }
-        | expr AND expr     { Binop (Conj, $1, $3) }
-        | expr OR expr      { Binop (Disj, $1, $3) }
+        VAR                { Var ($1) }
+        |OPEN expr CLOSE   { $2 }     
+        |NOT expr          { Neg ($2) }  
+        |expr IMPL expr    { Binop (Impl, $1, $3) }
+        |expr AND expr     { Binop (Conj, $1, $3) }
+        |expr OR expr      { Binop (Disj, $1, $3) }
